@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    max-width: max-content;
+    flex-direction: column;
+    border-radius: 30px;
+    border-color: black;
+    border: solid;
+    margin-left: 0;
+    padding: 25px;
+    gap: 20px;
+}
+.form-group {
+    display: flex;
+    gap: 20px;
+}

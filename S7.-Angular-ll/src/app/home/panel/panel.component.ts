@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-panel',
@@ -7,34 +8,48 @@ import { Component } from '@angular/core';
 })
 export class PanelComponent {
 
-  public valuePage: number = 1;
-  public valueLenguage: number = 1;
+  webForm = new FormGroup({
+    pageNum: new FormControl(1),
+    lenguageNum: new FormControl(1)
+  });
 
+  public validNumberPage() {
+
+    if((Number(this.webForm.value.pageNum)) < 1) {
+
+      this.webForm.controls.pageNum.setValue(1);
+    }
+  }
+
+  public validNumberLenguage() {
+
+    if((Number(this.webForm.value.lenguageNum)) < 1) {
+
+      this.webForm.controls.lenguageNum.setValue(1);
+    }
+  }
  
   public sumOne(id:string) {
 
-    if(id == "pageSum") {
-      this.valuePage = this.valuePage + 1;
+    if(id == "page") {
+      this.webForm.controls.pageNum.setValue(Number(this.webForm.value.pageNum) + 1);
     }
-    if(id == "lenguageSum") {
-      this.valueLenguage = this.valueLenguage + 1;
+    
+    if(id == "lenguage") {
+      this.webForm.controls.lenguageNum.setValue(Number(this.webForm.value.lenguageNum) + 1);
     }
 
   }
   public remOne(id:string) {
     
-    if(id == "pageRem") {
-      this.valuePage = this.valuePage - 1;
-      if(this.valuePage < 1) {
-        this.valuePage = 1;
-      } 
+    if(id == "page") {
+      this.webForm.controls.pageNum.setValue(Number(this.webForm.value.pageNum) - 1);
+      this.validNumberPage();
     }
 
-    if(id == "lenguageRem") {
-      this.valueLenguage = this.valueLenguage - 1;
-      if(this.valueLenguage < 1) {
-        this.valueLenguage = 1;
-      }
+    if(id == "lenguage") {
+      this.webForm.controls.lenguageNum.setValue(Number(this.webForm.value.lenguageNum) - 1);
+      this.validNumberLenguage();
     }
   }
 }

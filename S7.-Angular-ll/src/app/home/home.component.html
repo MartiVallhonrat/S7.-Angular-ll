@@ -10,7 +10,7 @@
             </label>
         </div>
         <div class="container">
-            <app-panel></app-panel>
+            <app-panel *ngIf="isCheckedWeb"></app-panel>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckSEO" (change)="checkTotal()" [(ngModel)]="isCheckedSEO">

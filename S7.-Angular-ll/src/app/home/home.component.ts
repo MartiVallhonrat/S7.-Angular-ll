@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  
+
   public totalPrice: number = 0;
   public isCheckedWeb: any;
   public isCheckedSEO: any;

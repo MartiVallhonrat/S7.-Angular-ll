@@ -13,3 +13,16 @@
     display: flex;
     gap: 20px;
 }
+button {
+    background-color: orangered;
+    color: white;
+    width: 40px;
+    border: solid;
+    border-color: orangered;
+}
+button:hover {
+    background-color: white;
+    border: solid;
+    border-color: orangered;
+    color: orangered;
+}

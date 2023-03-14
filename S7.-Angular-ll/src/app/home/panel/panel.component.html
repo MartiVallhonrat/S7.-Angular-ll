@@ -1,10 +1,18 @@
 <div class="container">
     <div class="form-group">
         <label for="pageNum">Número de pàginas:</label>
-        <input type="number" name="pageNum" id="pageNum" min="1">
+        <div class="gap-2 d-flex">
+            <button #pageRem id="pageRem" type="button" class="btn default-button" (click)="remOne(pageRem.id)">-</button>
+            <input #inputPage class="text-center" type="number" name="pageNum" id="pageNum" [(ngModel)]="valuePage">
+            <button #pageSum id="pageSum" type="button" class="btn default-button" (click)="sumOne(pageSum.id)">+</button>
+        </div>
     </div>
     <div class="form-group">
-        <label for="pageNum">Número de idiomas:</label>
-        <input type="number" name="pageLenguage" id="pageLenguage" min="1">
+        <label for="pageLenguage">Número de idiomas:</label>
+        <div class="gap-2 d-flex">
+            <button #lenguageRem id="lenguageRem" type="button" class="btn default-button" (click)="remOne(lenguageRem.id)">-</button>
+            <input #inputLenguage class="text-center" type="number" name="pageLenguage" id="pageLenguage" [(ngModel)]="valueLenguage">
+            <button #lenguageSum id="lenguageSum" type="button" class="btn default-button" (click)="sumOne(lenguageSum.id)">+</button>
+        </div>
     </div>
 </div>

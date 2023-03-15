@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { InteractionService } from 'src/app/interaction.service';
 
 @Component({
   selector: 'app-panel',
@@ -8,10 +9,17 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class PanelComponent {
 
+  constructor(private _panelMessageSource: InteractionService) {}
+
   webForm = new FormGroup({
     pageNum: new FormControl(1),
     lenguageNum: new FormControl(1)
   });
+
+  public sendNumbers() {
+
+    this._panelMessageSource.calculateAndSendMessage(Number(this.webForm.value.pageNum), Number(this.webForm.value.lenguageNum))
+  }
 
   public validNumberPage() {
 
@@ -19,6 +27,8 @@ export class PanelComponent {
 
       this.webForm.controls.pageNum.setValue(1);
     }
+
+    this.sendNumbers()
   }
 
   public validNumberLenguage() {
@@ -27,6 +37,8 @@ export class PanelComponent {
 
       this.webForm.controls.lenguageNum.setValue(1);
     }
+
+    this.sendNumbers()
   }
  
   public sumOne(id:string) {
@@ -38,6 +50,9 @@ export class PanelComponent {
     if(id == "lenguage") {
       this.webForm.controls.lenguageNum.setValue(Number(this.webForm.value.lenguageNum) + 1);
     }
+
+    this.validNumberLenguage()
+    this.validNumberPage()
 
   }
   public remOne(id:string) {
@@ -51,5 +66,8 @@ export class PanelComponent {
       this.webForm.controls.lenguageNum.setValue(Number(this.webForm.value.lenguageNum) - 1);
       this.validNumberLenguage();
     }
+
+    this.validNumberLenguage()
+    this.validNumberPage()
   }
 }

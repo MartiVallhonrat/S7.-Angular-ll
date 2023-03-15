@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'S7.-Angular-ll';
+  startClick: boolean = false
+
+  start() {
+    this.startClick = true;
+  }
 }

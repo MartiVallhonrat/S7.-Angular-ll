@@ -1,2 +1,6 @@
-<h1 class="text-center pt-5">{{title}}</h1>
-<app-home></app-home>
+<div *ngIf="!startClick" class="text-center pt-5">
+    <h1>{{title}}</h1>
+    <p>En aquesta pàgina web pots seleccionar les teves opcions de compra d'un servei de web building & managment.</p>
+    <button class="btn bg-primary text-white" (click)="start()">COMENÇAR</button>
+</div>
+<app-home *ngIf="startClick"></app-home>

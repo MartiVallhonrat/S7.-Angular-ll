@@ -1,3 +1,13 @@
+<ng-template #lenguageModal let-modalLenguage>
+    <div class="modal-content container">
+        <p>En este componente tiene que indicarse el número de lenguas que tendra su sitio web.</p>
+    </div>
+</ng-template>
+<ng-template #pageModal let-modalPage>
+    <div class="modal-content container">
+        <p>En este componente tiene que indicarse el número de pàginas que tendra su sitio web.</p>
+    </div>
+</ng-template>
 <form class="container" [formGroup]="webForm">
     <div class="form-group">
         <label for="pageNum">Número de pàginas:</label>
@@ -5,6 +15,9 @@
             <button type="button" class="btn default-button" (click)="remOne('page')">-</button>
             <input formControlName="pageNum" class="text-center form-control" type="number" (change)="validNumberPage()">
             <button type="button" class="btn default-button" (click)="sumOne('page')">+</button>
+            <div class="containerIcon align-items-center d-flex" (click)="modal.open(pageModal)">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
         </div>
     </div>
     <div class="form-group">
@@ -13,6 +26,10 @@
             <button type="button" class="btn default-button" (click)="remOne('lenguage')">-</button>
             <input formControlName="lenguageNum" class="text-center form-control" type="number" (change)="validNumberLenguage()">
             <button type="button" class="btn default-button" (click)="sumOne('lenguage')">+</button>
+            <div class="containerIcon align-items-center d-flex" (click)="modal.open(lenguageModal)">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
         </div>
     </div>
 </form>
+

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { InteractionService } from 'src/app/interaction.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
 
 @Component({
   selector: 'app-panel',
@@ -9,7 +10,10 @@ import { InteractionService } from 'src/app/interaction.service';
 })
 export class PanelComponent {
 
-  constructor(private _panelMessageSource: InteractionService) {}
+  constructor(
+    private _panelMessageSource: InteractionService,
+    public modal: NgbModal
+  ) {}
 
   webForm = new FormGroup({
     pageNum: new FormControl(1),
@@ -19,6 +23,10 @@ export class PanelComponent {
   public sendNumbers() {
 
     this._panelMessageSource.calculateAndSendMessage(Number(this.webForm.value.pageNum), Number(this.webForm.value.lenguageNum))
+  }
+
+  public test() {
+    debugger
   }
 
   public validNumberPage() {

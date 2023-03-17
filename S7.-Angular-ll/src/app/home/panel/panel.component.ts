@@ -19,7 +19,7 @@ export class PanelComponent {
 
   webForm = new FormGroup({
     pageNum: new FormControl(1),
-    lenguageNum: new FormControl(1)
+    lenguageNum: new FormControl(1),
   });
 
   public sendNumbers() {

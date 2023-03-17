@@ -1,13 +1,10 @@
-<ng-template #lenguageModal let-modalLenguage>
-    <div class="modal-content container">
-        <p>En este componente tiene que indicarse el número de lenguas que tendra su sitio web.</p>
+<ng-template #content let-modal>
+    <div class="modal-content modal-container">
+        <p *ngIf="!pageModal">En este componente tiene que indicarse el número de lenguas que tendra su sitio web.</p>
+        <p *ngIf="pageModal">En este componente tiene que indicarse el número de idiomas que tendra su sitio web.</p>
     </div>
 </ng-template>
-<ng-template #pageModal let-modalPage>
-    <div class="modal-content container">
-        <p>En este componente tiene que indicarse el número de pàginas que tendra su sitio web.</p>
-    </div>
-</ng-template>
+
 <form class="container" [formGroup]="webForm">
     <div class="form-group">
         <label for="pageNum">Número de pàginas:</label>
@@ -15,7 +12,7 @@
             <button type="button" class="btn default-button" (click)="remOne('page')">-</button>
             <input formControlName="pageNum" class="text-center form-control" type="number" (change)="validNumberPage()">
             <button type="button" class="btn default-button" (click)="sumOne('page')">+</button>
-            <div class="containerIcon align-items-center d-flex" (click)="modal.open(pageModal)">
+            <div class="containerIcon align-items-center d-flex" (click)="openModal(content, 'pageModal')">
                 <i class="fa-solid fa-circle-info"></i>
             </div>
         </div>
@@ -26,7 +23,7 @@
             <button type="button" class="btn default-button" (click)="remOne('lenguage')">-</button>
             <input formControlName="lenguageNum" class="text-center form-control" type="number" (change)="validNumberLenguage()">
             <button type="button" class="btn default-button" (click)="sumOne('lenguage')">+</button>
-            <div class="containerIcon align-items-center d-flex" (click)="modal.open(lenguageModal)">
+            <div class="containerIcon align-items-center d-flex" (click)="openModal(content, 'lenguageModal')">
                 <i class="fa-solid fa-circle-info"></i>
             </div>
         </div>

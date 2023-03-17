@@ -12,8 +12,10 @@ export class PanelComponent {
 
   constructor(
     private _panelMessageSource: InteractionService,
-    public modal: NgbModal
+    public modal: NgbModal,
   ) {}
+
+  public pageModal: boolean = false;
 
   webForm = new FormGroup({
     pageNum: new FormControl(1),
@@ -25,8 +27,16 @@ export class PanelComponent {
     this._panelMessageSource.calculateAndSendMessage(Number(this.webForm.value.pageNum), Number(this.webForm.value.lenguageNum))
   }
 
-  public test() {
-    debugger
+  public openModal(content: any, id: string) {
+
+    if(id == "pageModal") {
+      this.pageModal = true;
+    }
+    if(id == "lenguageModal") {
+      this.pageModal = false;
+    }
+
+    this.modal.open(content, {size: "xl"})
   }
 
   public validNumberPage() {

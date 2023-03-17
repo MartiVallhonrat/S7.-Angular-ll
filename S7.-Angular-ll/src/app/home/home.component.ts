@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit {
 
     if(this.isCheckedWeb) {
       price = price + (500 + this.plusPriceWeb);
+    } else {
+      this.plusPriceWeb = 30;
     }
     if(this.isCheckedSEO) {
       price = price + 300;

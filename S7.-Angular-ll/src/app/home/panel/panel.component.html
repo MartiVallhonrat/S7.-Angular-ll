@@ -10,7 +10,7 @@
         <label for="pageNum">Número de pàginas:</label>
         <div class="gap-2 d-flex">
             <button type="button" class="btn default-button" (click)="remOne('page')">-</button>
-            <input formControlName="pageNum" class="text-center form-control" type="number" (change)="validNumberPage()">
+            <input placeholder="número de pàginas" formControlName="pageNum" class="text-center form-control" type="number" (change)="validNumberPage()">
             <button type="button" class="btn default-button" (click)="sumOne('page')">+</button>
             <div class="containerIcon align-items-center d-flex" (click)="openModal(content, 'pageModal')">
                 <i class="fa-solid fa-circle-info"></i>
@@ -21,7 +21,7 @@
         <label for="pageLenguage">Número de idiomas:</label>
         <div class="gap-2 d-flex">
             <button type="button" class="btn default-button" (click)="remOne('lenguage')">-</button>
-            <input formControlName="lenguageNum" class="text-center form-control" type="number" (change)="validNumberLenguage()">
+            <input placeholder="número de lenguas" formControlName="lenguageNum" class="text-center form-control" type="number" (change)="validNumberLenguage()">
             <button type="button" class="btn default-button" (click)="sumOne('lenguage')">+</button>
             <div class="containerIcon align-items-center d-flex" (click)="openModal(content, 'lenguageModal')">
                 <i class="fa-solid fa-circle-info"></i>

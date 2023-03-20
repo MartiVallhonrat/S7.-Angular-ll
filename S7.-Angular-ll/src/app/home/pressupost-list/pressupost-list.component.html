@@ -1,0 +1,10 @@
+<p>pressupost works!</p>
+<template *ngFor="let pressupost of pressupostList">
+    <div class="container">
+        <h2>Pressupost {{pressupost.budgetName.value }}</h2>
+        <p>Nom del pressupost: {{pressupost.budgetName}}</p>
+        <p>Nom del client: {{pressupost.clientName}}</p>
+        <p>Preu: {{pressupost.totalPrice}}</p>
+    </div>
+
+</template>

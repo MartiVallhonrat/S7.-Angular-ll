@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { InteractionService } from '../interaction.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface Budget {
-  budgetName: string;
-  clientName: string;
-  isCheckedWeb: boolean;
-  isCheckedSEO: boolean;
-  isCheckedAds: boolean;
+  budgetName: any;
+  clientName: any;
+  isCheckedWeb: any;
+  isCheckedSEO: any;
+  isCheckedAds: any;
   totalPrice: number;
 }
 
@@ -20,40 +21,58 @@ export class HomeComponent implements OnInit {
 
   constructor(private _panelMessageSource: InteractionService) {}
 
-  public budgetName: any;
-  public clientName: any;
-  public isCheckedWeb: any = false;
-  public plusPriceWeb: number = 30;
-  public isCheckedSEO: any = false;
-  public isCheckedAds: any = false;
-  public totalPrice: number = 0;
 
+  public plusPriceWeb:number = 30;
+  public totalPrice = 0;
   public pressupostList: Budget[] = [];
+  public submited: boolean = false;
   
+  
+  budgetForm = new FormGroup({
+    budgetName: new FormControl('', Validators.required),
+    clientName: new FormControl('', Validators.required),
+    isCheckedWeb: new FormControl(false),
+    isCheckedSEO: new FormControl(false),
+    isCheckedAds: new FormControl(false)
+  })
+
   ngOnInit() {
     this._panelMessageSource.panelMessage$
       .subscribe(
         resultMessage => {
           this.plusPriceWeb = resultMessage;
+          console.log(this.plusPriceWeb)
           this.checkTotal()
         }
       )
   }
+
+  public setClear() {
+    this.budgetForm.value.budgetName = "";
+    this.budgetForm.value.clientName = "";
+    this.budgetForm.value.isCheckedWeb = false;
+    this.budgetForm.value.isCheckedSEO = false;
+    this.budgetForm.value.isCheckedAds = false;
+    this.plusPriceWeb = 30;
+    this.checkTotal();
+  }
+  
 
   public checkTotal() {
 
     this.totalPrice = 0;
     let price: number = this.totalPrice;
 
-    if(this.isCheckedWeb) {
+    if(this.budgetForm.value.isCheckedWeb) {
       price = price + (500 + this.plusPriceWeb);
+      console.log(this.plusPriceWeb)
     } else {
       this.plusPriceWeb = 30;
     }
-    if(this.isCheckedSEO) {
+    if(this.budgetForm.value.isCheckedSEO) {
       price = price + 300;
     }
-    if(this.isCheckedAds) {
+    if(this.budgetForm.value.isCheckedAds) {
       price = price + 200;
     }
 
@@ -62,15 +81,25 @@ export class HomeComponent implements OnInit {
 
   public pushPressupostList() {
 
-    this.pressupostList.push({
-      budgetName: this.budgetName,
-      clientName: this.clientName,
-      isCheckedWeb: this.isCheckedWeb,
-      isCheckedSEO: this.isCheckedSEO,
-      isCheckedAds: this.isCheckedAds,
-      totalPrice: this.totalPrice
-    })
+    this.submited = true;
+
+    if(!this.budgetForm.controls['clientName'].errors?.['required'] && !this.budgetForm.controls['budgetName'].errors?.['required']) {
+
+      this.pressupostList.push({
+        budgetName: this.budgetForm.value.budgetName,
+        clientName: this.budgetForm.value.clientName,
+        isCheckedWeb: this.budgetForm.value.isCheckedWeb,
+        isCheckedSEO: this.budgetForm.value.isCheckedSEO,
+        isCheckedAds: this.budgetForm.value.isCheckedAds,
+        totalPrice: this.totalPrice
+      })
+
+      this.setClear();
+    }
 
     console.log(this.pressupostList)
+    this._panelMessageSource.renderPressupostList(this.pressupostList);
+    
+
   }
 }

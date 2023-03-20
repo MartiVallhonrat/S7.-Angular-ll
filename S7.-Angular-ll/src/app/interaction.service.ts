@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class InteractionService {
 
-  private _panelMessageSource = new Subject<number>();
+  private _panelMessageSource = new Subject<any>();
   panelMessage$ = this._panelMessageSource.asObservable();
 
   constructor() { }
@@ -17,4 +17,12 @@ export class InteractionService {
 
     this._panelMessageSource.next(resultMessage);
   }
+
+  renderPressupostList(pressupostList:any) {
+    
+    const finalArray = pressupostList;
+
+    this._panelMessageSource.next(finalArray);
+  }
+
 }

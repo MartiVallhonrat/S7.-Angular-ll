@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { InteractionService } from 'src/app/interaction.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
@@ -21,6 +21,7 @@ export class PanelComponent {
     pageNum: new FormControl(1),
     lenguageNum: new FormControl(1),
   });
+
 
   public sendNumbers() {
 

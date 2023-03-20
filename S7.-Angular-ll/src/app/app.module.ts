@@ -8,12 +8,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { PanelComponent } from './home/panel/panel.component';
+import { PressupostListComponent } from './home/pressupost-list/pressupost-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    PanelComponent
+    PanelComponent,
+    PressupostListComponent
   ],
   imports: [
     BrowserModule,

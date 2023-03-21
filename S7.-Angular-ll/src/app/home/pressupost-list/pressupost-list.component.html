@@ -1,10 +1,27 @@
-<p>pressupost works!</p>
-<template *ngFor="let pressupost of pressupostList">
-    <div class="container">
-        <h2>Pressupost {{pressupost.budgetName.value }}</h2>
-        <p>Nom del pressupost: {{pressupost.budgetName}}</p>
-        <p>Nom del client: {{pressupost.clientName}}</p>
-        <p>Preu: {{pressupost.totalPrice}}</p>
+<div class="container d-flex-column gap-4">
+    <div>
+        <div class="container">
+            <h2>Ordenar Presupuestos:</h2>
+        </div>
+        <div class="container d-flex gap-2">
+            <button #pressupost1 title="buttonAlfa" class="btn bg-primary text-white" (click)="printPressuposts(pressupost1.title)">ORDENAR ALFABETICAMENTE</button>
+            <button #pressupost2 title="buttonDate" class="btn bg-primary text-white" (click)="printPressuposts(pressupost2.title)">ORDENAR POR FECHA</button>
+            <button #pressupost3 title="buttonDefault" class="btn bg-primary text-white" (click)="printPressuposts(pressupost3.title)">ORDEN PREDEFINIDO</button>
+        </div>
+        <div class="search-container container">
+            <span class="h4">Buscar:</span>
+            <input class="mx-1" #searchBar title="searchBar" type="text" (input)="onSearchValue(searchBar.value)">
+        </div>
     </div>
-
-</template>
+    <div class="container">
+        <div *ngFor="let pressupost of pressupostList">
+            <div class="containerBudgets" *ngIf="this.enteredSearchValue == '' || pressupost.budgetName.toLowerCase().includes(this.enteredSearchValue)">
+                <h2>Pressupost {{pressupost.budgetName}}</h2>
+                <p>Nom del pressupost: {{pressupost.budgetName}}</p>
+                <p>Nom del client: {{pressupost.clientName}}</p>
+                <p>Preu: {{pressupost.totalPrice}}</p>
+                <p>Data del pressupost {{pressupost.date}}</p>
+            </div>
+        </div>
+    </div>
+</div>

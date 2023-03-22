@@ -25,4 +25,8 @@ export class InteractionService {
     this._panelMessageSource.next(finalArray);
   }
 
+  clearPanel() {
+
+    this._panelMessageSource.next;
+  }
 }

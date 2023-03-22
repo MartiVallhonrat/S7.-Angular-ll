@@ -39,6 +39,9 @@
                     Una campaña de Google Ads (200€)
                 </label>
             </div>
+            <div class="container text-danger" *ngIf="this.submited && this.customError">
+                <div>Este campo es obligatorio</div>
+            </div>
             <div class="container">
                 <h3 id="totalPrice">Price: {{totalPrice}}€</h3>
             </div>

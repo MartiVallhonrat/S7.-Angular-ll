@@ -28,7 +28,6 @@ button:hover {
 }
 .modal-container {
     flex-direction: column;
-    border-radius: 30px;
     border-color: black;
     border: solid;
     padding: 25px;

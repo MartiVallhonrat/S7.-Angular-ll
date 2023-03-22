@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { InteractionService } from 'src/app/interaction.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; 
+import { BindQueryParamsFactory } from '@ngneat/bind-query-params';
 
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.css']
 })
-export class PanelComponent {
+export class PanelComponent implements OnInit {
 
   constructor(
     private _panelMessageSource: InteractionService,
     public modal: NgbModal,
+    private factory: BindQueryParamsFactory
   ) {}
 
   public pageModal: boolean = false;
@@ -22,6 +24,23 @@ export class PanelComponent {
     lenguageNum: new FormControl(1),
   });
 
+  ngOnInit(): void {
+    this._panelMessageSource.panelMessage$
+    .subscribe()
+    this.webForm = new FormGroup({
+      pageNum: new FormControl(1),
+      lenguageNum: new FormControl(1),
+    });
+    }
+
+  bindQueryParamsManager = this.factory.create ([
+    { queryKey: "pageNum", type: "number" },
+    { queryKey: "lenguageNum", type: "number" }
+  ]).connect(this.webForm);
+
+  ngOnDestroy() {
+    this.bindQueryParamsManager.destroy();
+  }
 
   public sendNumbers() {
 
@@ -29,6 +48,7 @@ export class PanelComponent {
   }
 
   public openModal(content: any, id: string) {
+    debugger
 
     if(id == "pageModal") {
       this.pageModal = true;

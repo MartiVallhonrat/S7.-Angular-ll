@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InteractionService } from '../interaction.service';
-import { FormControl, FormControlDirective, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {formatDate} from '@angular/common';
+import { BindQueryParamsFactory } from '@ngneat/bind-query-params';
 
 interface Budget {
   budgetName: string | null | undefined;
@@ -22,14 +23,16 @@ interface Budget {
 export class HomeComponent implements OnInit {
 
   constructor(
-    private _panelMessageSource: InteractionService
+    private _panelMessageSource: InteractionService,
+    private factory: BindQueryParamsFactory
   ) {}
 
 
   public plusPriceWeb: number = 30;
-  public totalPrice = 0;
+  public totalPrice: number = 0;
   public pressupostList: Budget[] = [];
   public submited: boolean = false;
+  public customError: boolean = false;
   
   
   budgetForm = new FormGroup({
@@ -40,7 +43,20 @@ export class HomeComponent implements OnInit {
     isCheckedAds: new FormControl(false)
   })
 
+  bindQueryParamsManager = this.factory.create ([
+    { queryKey: "budgetName" },
+    { queryKey: "clientName" },
+    { queryKey: "isCheckedWeb", type: "boolean" },
+    { queryKey: "isCheckedSEO", type: "boolean" },
+    { queryKey: "isCheckedAds", type: "boolean" }
+  ]).connect(this.budgetForm);
+
+  ngOnDestroy() {
+    this.bindQueryParamsManager.destroy();
+  }
+
   ngOnInit() {
+    this.checkTotal();
     this._panelMessageSource.panelMessage$
       .subscribe(
         resultMessage => {
@@ -48,6 +64,17 @@ export class HomeComponent implements OnInit {
           this.checkTotal()
         }
       )
+  }
+
+  public checkCustomError() {
+
+    if(this.budgetForm.value.isCheckedWeb == false && this.budgetForm.value.isCheckedSEO == false && this.budgetForm.value.isCheckedAds == false) {
+
+      this.customError = true;
+    } else {
+
+      this.customError = false;
+    }
   }
 
   public checkTotal() {
@@ -68,11 +95,14 @@ export class HomeComponent implements OnInit {
     }
 
     this.totalPrice = price;
+    this.checkCustomError();
   }
 
   public pushPressupostList() {
 
-    if(this.budgetForm.valid) {
+    this.checkCustomError();
+
+    if(this.budgetForm.valid && !this.customError) {
 
       this.pressupostList.push({
         budgetName: this.budgetForm.value.budgetName,
@@ -88,6 +118,7 @@ export class HomeComponent implements OnInit {
 
       this.budgetForm.reset();
       this.submited = false;
+      this._panelMessageSource.clearPanel();
       this.checkTotal();
     } else {
 

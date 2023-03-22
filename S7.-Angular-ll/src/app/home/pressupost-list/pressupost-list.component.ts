@@ -6,6 +6,7 @@ import { InteractionService } from 'src/app/interaction.service';
   templateUrl: './pressupost-list.component.html',
   styleUrls: ['./pressupost-list.component.css']
 })
+
 export class PressupostListComponent implements OnInit {
 
   public pressupostListDefault: any;
@@ -24,7 +25,7 @@ export class PressupostListComponent implements OnInit {
   }
 
   constructor(
-    private _panelMessageSource: InteractionService
+    private _panelMessageSource: InteractionService,
   ) {}
 
   public orderAlfabethicly() {

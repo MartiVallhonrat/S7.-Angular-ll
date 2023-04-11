@@ -17,7 +17,7 @@ export class PanelComponent implements OnInit {
     private factory: BindQueryParamsFactory
   ) {}
 
-  public pageModal: boolean = false;
+  public contentModal: string = "";
 
   webForm = new FormGroup({
     pageNum: new FormControl(1),
@@ -51,13 +51,13 @@ export class PanelComponent implements OnInit {
     debugger
 
     if(id == "pageModal") {
-      this.pageModal = true;
+      this.contentModal = "En este componente tiene que indicarse el número de paginas que tendra su sitio web."
+      this.modal.open(content, {size: "xl"})
     }
     if(id == "lenguageModal") {
-      this.pageModal = false;
+      this.contentModal = "En este componente tiene que indicarse el número de idiomas que tendra su sitio web."
+      this.modal.open(content, {size: "xl"})
     }
-
-    this.modal.open(content, {size: "xl"})
   }
 
   public validNumberPage() {
